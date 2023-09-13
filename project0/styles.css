@@ -1,0 +1,50 @@
+body {
+	font-family: 'arial,sans-serif';
+	margin-left:40px;
+	margin-right:40px;				
+}
+.flex-container {
+	display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;				
+}
+.flex-container > div {
+	padding: 10px;
+}
+a {
+	//font-family: 'courier';
+	font:13px/27px Roboto,Arial,sans-serif;
+}
+.center {
+	position: fixed;
+	top: 40%;
+	left: 30%;
+	justify-content: center;
+	align-items: center;
+	min-height: 100%;
+	min-width: 30%;
+}
+form {
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+form > div {
+	text-align: center;
+	padding: 5px;
+}
+input {
+		border-radius: 25px;
+		border-width: 1px;	
+		font-family: arial,sans-serif;
+		margin-bottom: 8px;	
+		font-size: 16px;
+		padding: 5px;		
+}
+.logo {
+	position: fixed;
+	top: 25%;
+	left: 36%;
+	justify-content: center;
+	align-items: center;
+}

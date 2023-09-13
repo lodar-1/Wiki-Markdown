@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tangerine">		
+		<style>
+			body {
+				font-family: 'arial,sans-serif';	
+				margin-left:40px;
+				margin-right:40px;		
+			}
+			.button {
+				background-color: #4d90fe;
+				border: 1px solid #3079ed;
+				color: #fff;
+				height: 30px;
+				min-width: 120px;
+				padding: 0 12px;
+				border-radius: 2px;
+				cursor: default;
+				font-size: 11px;
+				font-weight: bold;
+				text-align: center;
+				white-space: nowrap;
+				float: right;				
+			}
+			
+			.flex-container_top {
+				display: flex;
+				flex-direction: row-reverse;
+				flex-wrap: wrap;				
+			}
+			.flex-container_top > div {
+				padding: 10px;
+			}
+			.grid-container {
+				display: grid;
+				height: 250px;
+				max-width: 800px;
+				align-content: left;
+				align-items: center;
+				text-align: left;
+				grid-template-columns: 200px auto;
+				padding 10px;
+			}
+			.grid-container > div {
+				font-family: 'arial,sans-serif';
+				font-size: 13px;
+				
+			}
+			.input {
+				width: 100%;
+				line-height: 22px;
+			}
+			a {
+				//font-family: 'courier';
+				font:13px/27px Roboto,Arial,sans-serif;
+			}
+			hr.solid {
+				border: 0;
+				border-top: 1px solid #eee;
+			}
+
+		</style>			
+		<title>Advanced Search</title>
+	</head>		
+	<body>
+		<div class="flex-container_top">
+			<div><a href="index.html">Google Search</a></div>
+		</div>
+		<p style="font-size: 20px;color: #d93025;">Advanced Search</p>
+		<hr class="solid">
+		<div class="search">
+			<form action="https://www.google.com/search" method="get">
+				<div class="grid-container">
+					<div>Find pages with...</div>
+					<div>&nbsp;</div>
+					<div>all these words:</div>
+					<div><input id="txtS" type="text" name="as_q" class="input"></div>
+					<div>exact words or phrase:</div>
+					<div><input id="txtE" type="text" name="as_epq" class="input"></div>
+					<div>any of these words:</div>
+					<div><input id="txtA" type="text" name="as_oq" class="input"></div>
+					<div>none of these words:</div>
+					<div><input id="txtN" type="text" name="as_eq" class="input"></div>
+					<div>&nbsp;</div>
+					<div style="text-align: right;"><input id="btnsearch" type="submit" class="button" value="Advanced Search"></div>
+					
+				</div>
+			</form>
+			
+		</div>
+	</body>	
+</html>	

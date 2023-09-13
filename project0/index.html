@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<link rel="stylesheet" href="styles.css">
+		<style>
+			
+			#btnsearch, #btnI	{
+				border-radius: 4px;
+				background-color: #f8f9fa;	
+				color: #3c4043;
+				padding: 10px;
+				font-family: arial,sans-serif;
+				font-size: 14px;
+				margin: 11px 4px;
+				padding: 0 16px;
+				line-height: 27px;
+				height: 36px;
+				min-width: 54px;
+				text-align: center;
+				cursor: pointer;
+				user-select: none;
+			}
+
+		</style>
+		<title>Search</title>
+	</head>
+	<body>
+		<div class="flex-container">
+			<div><a href="imagesearch.html">Image Search</a></div>
+			<div><a href="advancedsearch.html">Advanced Search</a></div>
+		</div>
+		</br>
+		<div class="logo"><img src="images/googlelogo_color_272x92dp.png"></div>
+		<div class="center">
+			<form action="https://www.google.com/search" method="get">
+				<div><input id="txtS" type="text" name="q" style="width: 100%;line-height: 22px"></div>
+				<div><input id="btnsearch" type="submit" value="Google Search">
+				<input id="btnI" type="button" value="I'm Feeling Lucky"></div>
+			</form>
+		</div>
+    </body>
+    <script type="text/javascript">
+		document.getElementById("btnI").onclick = function () {
+		location.href = "https://www.google.com/search?q=" + txtS.value.trim() + "&btnI=" + btnI.value;
+		};
+	</script>
+</html>
