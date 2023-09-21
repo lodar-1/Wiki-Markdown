@@ -6,11 +6,11 @@
 {% block body %}
 <form method="POST" action =  "{% url 'add' %}" id="addform">
 	{% csrf_token %}
-	Title: <input type="text" label="Title" name="title">
-	</br></br>
-	<!--<input type="textarea" rows=50 cols=200 value="Enter markdown..."> -->
-	<textarea rows="4" cols="50" name="comment" style="width: 80%; height:80vh">Enter text here...</textarea>
-	</br>
-	<div align='center'><input type="submit" value="Submit"></div>
+	<div class="flex-container">
+		<div><input type="text" label="Title" name="title" placeholder="Title" size ="50"></div>
+		<div><textarea rows="4" cols="50" name="comment" style="width: 100%; height:80vh" placeholder="Enter markdown text here..."></textarea></div>
+		<div style="text-align: right;"><input type="submit" value="Submit"></div>
+	</div>
 </form>
+	
 {% endblock %}
