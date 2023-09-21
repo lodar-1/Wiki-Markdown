@@ -10,7 +10,7 @@ class newSearch(forms.Form):
 
 class addForm(forms.Form):
 	title = forms.CharField(label="title")
-	comment = forms.CharField(label="comment")
+	content = forms.CharField(label="content")
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -23,13 +23,14 @@ def add(request):
 		listitems = util.list_entries()
 		for li in listitems:
 			if li.upper() == request.POST.get("title").strip().upper():
-				return render(request, "encyclopedia/addentry.html", {"error": 'An entry with this name already exists', "stitle": request.POST.get("title").strip(), "scontent": request.POST.get("content") })
-		form = addForm(request.POST) 
+				return render(request, "encyclopedia/addentry.html", {"error": 'An entry with this title already exists', "stitle": request.POST.get("title").strip(), "scontent": request.POST.get("content") })
+		form = addForm(request.POST)
+		print(form) 
 		if form.is_valid():
 			util.save_entry(form.cleaned_data["title"], form.cleaned_data["content"])
 			return render(request, "encyclopedia/entry.html", {"title": form.cleaned_data["title"], "entry":form.cleaned_data["content"]})
 		else:
-			return render(request, "encyclopedia/addentry.html")	
+			return render(request, "encyclopedia/addentry.html", {"error": "An error occcured."})	
 	else:
 		return render(request, "encyclopedia/addentry.html")
 
