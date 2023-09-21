@@ -8,12 +8,27 @@ from . import util
 class newSearch(forms.Form):
 	searchphrase = forms.CharField()
 
+class addForm(forms.Form):
+	title = forms.CharField(label="title")
+	comment = forms.CharField(label="comment")
+
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })
 
 #DM 20230919
+def add(request):
+	if request.method == "POST":
+		form = addForm(request.POST) #forms.Form
+		if form.is_valid():
+			util.save_entry(form.cleaned_data["title"], form.cleaned_data["comment"])
+			return render(request, "encyclopedia/entry.html", {"title": form.cleaned_data["title"], "entry":form.cleaned_data["comment"]})
+		else:
+			return render(request, "encyclopedia/addentry.html")	
+	else:
+		return render(request, "encyclopedia/addentry.html")
+
 def entry(request, entry):
 	#if entry=="search":
 	#	return search(request)

@@ -3,6 +3,20 @@ body {
     background-color: white;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: left;
+}
+
+.flex-container > div {
+  margin: 10px;
+  padding: 0px;
+  text-align: left;
+}
+
+
 code {
     white-space: pre;
 }
@@ -36,3 +50,4 @@ textarea {
 .sidebar h2 {
     margin-top: 5px;
 }
+
