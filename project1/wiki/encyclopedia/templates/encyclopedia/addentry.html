@@ -7,8 +7,9 @@
 <form method="POST" action =  "{% url 'add' %}" id="addform">
 	{% csrf_token %}
 	<div class="flex-container">
-		<div><input type="text" label="Title" name="title" placeholder="Title" size ="50"></div>
-		<div><textarea rows="4" cols="50" name="comment" style="width: 100%; height:80vh" placeholder="Enter markdown text here..."></textarea></div>
+		<div><input type="text" label="Title" name="title" placeholder="Title" size ="50" value="{{ stitle }}"></div>
+		<div style="color: red;">{{ error }}</div>
+		<div><textarea rows="4" cols="50" name="content" style="width: 100%; height:80vh" placeholder="Enter markdown text here...">{{ scontent }}</textarea></div>
 		<div style="text-align: right;"><input type="submit" value="Submit"></div>
 	</div>
 </form>

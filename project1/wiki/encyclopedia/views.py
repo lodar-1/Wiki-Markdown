@@ -20,10 +20,14 @@ def index(request):
 #DM 20230919
 def add(request):
 	if request.method == "POST":
-		form = addForm(request.POST) #forms.Form
+		listitems = util.list_entries()
+		for li in listitems:
+			if li.upper() == request.POST.get("title").strip().upper():
+				return render(request, "encyclopedia/addentry.html", {"error": 'An entry with this name already exists', "stitle": request.POST.get("title").strip(), "scontent": request.POST.get("content") })
+		form = addForm(request.POST) 
 		if form.is_valid():
-			util.save_entry(form.cleaned_data["title"], form.cleaned_data["comment"])
-			return render(request, "encyclopedia/entry.html", {"title": form.cleaned_data["title"], "entry":form.cleaned_data["comment"]})
+			util.save_entry(form.cleaned_data["title"], form.cleaned_data["content"])
+			return render(request, "encyclopedia/entry.html", {"title": form.cleaned_data["title"], "entry":form.cleaned_data["content"]})
 		else:
 			return render(request, "encyclopedia/addentry.html")	
 	else:
