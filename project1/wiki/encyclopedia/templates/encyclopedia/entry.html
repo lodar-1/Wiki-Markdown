@@ -8,5 +8,10 @@
     <!--<h1>{{ title }} </h1>-->
        
         {{ entry|safe }}
-
+<form id="edit" method="POST">
+	{% csrf_token %}
+	<input id="txtI" type="hidden" name="title" value="{{ title }}">
+	<a href="#" onclick="document.getElementById('edit').submit();">Edit</a>
+</form>
 {% endblock %}
+
