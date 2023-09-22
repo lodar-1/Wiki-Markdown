@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import markdown2
+import random
 from django import forms
 from django.http import HttpResponseRedirect
 from . import util
@@ -31,7 +32,14 @@ def edit(request):
 	else:
 		return render(request, "encyclopedia/editentry.html")
 		
-	
+def randomentry(request):
+	listitems = util.list_entries()
+	if listitems:
+		sTitle 	= random.choice(listitems)
+		return HttpResponseRedirect("/wiki/" + sTitle)
+	else:	
+		return render(request, "encyclopedia/editentry.html", {"error": "There are no wiki entries."})
+		
 def add(request):
 	if request.method == "POST":
 		listitems = util.list_entries()
