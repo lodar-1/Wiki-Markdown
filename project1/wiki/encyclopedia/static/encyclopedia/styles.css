@@ -16,7 +16,11 @@ body {
   text-align: left;
 }
 
-
+.error {
+	color: 
+	red;
+	font-weight: bold;
+}
 code {
     white-space: pre;
 }

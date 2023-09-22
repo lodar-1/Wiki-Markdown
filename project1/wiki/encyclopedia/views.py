@@ -19,16 +19,12 @@ def index(request):
 
 #DM 20230919
 def edit(request):
-	print("REQUEST FROM EDIT: ")
-	print(request)
+
 	if request.method == "POST":
 		form = addForm(request.POST)
 		if form.is_valid():
 			stitle = form.cleaned_data["title"]			
 			util.save_entry(stitle, form.cleaned_data["content"])
-			strEntry = markdown2.markdown(form.cleaned_data["content"])
-			#return render(request, "encyclopedia/entry.html", {"title": entry, "entry":strEntry})
-			#return HttpResponseRedirect(reverse("encyclopedia/entry.html"))#, {"title": form.cleaned_data["title"], "entry":strEntry}))
 			return HttpResponseRedirect("/wiki/" + stitle)
 		else:
 			return render(request, "encyclopedia/editentry.html", {"error": "A validation error occcured."})	
@@ -44,8 +40,10 @@ def add(request):
 				return render(request, "encyclopedia/addentry.html", {"error": 'An entry with this title already exists', "stitle": request.POST.get("title").strip(), "scontent": request.POST.get("content") })
 		form = addForm(request.POST)
 		if form.is_valid():
-			util.save_entry(form.cleaned_data["title"], form.cleaned_data["content"])
-			return render(request, "encyclopedia/entry.html", {"title": form.cleaned_data["title"], "entry":form.cleaned_data["content"]})
+			sTitle = form.cleaned_data["title"]
+			util.save_entry(sTitle, form.cleaned_data["content"])
+			return HttpResponseRedirect("/wiki/" + sTitle)
+			#return render(request, "encyclopedia/entry.html", {"title": form.cleaned_data["title"], "entry":form.cleaned_data["content"]})
 		#	return render(request, "form.cleaned_data['title'")
 		else:
 			return render(request, "encyclopedia/addentry.html", {"error": "An error occcured."})	
@@ -53,24 +51,24 @@ def add(request):
 		return render(request, "encyclopedia/addentry.html")
 
 def entry(request, entry):
+	error = ""
 	if request.method == "POST":
-		strEntry = util.get_entry(entry)
-		
-		if strEntry == None:
-			strEntry = f"Error: Page not found ({search})"
-			entry = "Error - Page not found"	
-		print("REQUEST FROM ENTRY")
-		print(request)
-		return render(request, "encyclopedia/editentry.html", {"title": entry, "content":strEntry})					
+		sContent = util.get_entry(entry)
+		if sContent == None:
+			error = True
+			sContent = "<font class='error'>Error: Page not found</font>"
+			entry = "<font class='error'>Error - Page not found</font>"	
+		return render(request, "encyclopedia/editentry.html", {"title": entry, "content":sContent, "error": error})					
 
 	else:	
-		strEntry = util.get_entry(entry)
-		if strEntry is not None:
-			strEntry = markdown2.markdown(strEntry)
+		sContent = util.get_entry(entry)
+		if sContent is not None:
+			sContent = markdown2.markdown(sContent)
 		else:
-			strEntry = "Error: Page not foundxx"
+			error = True
+			sContent = "<font class='error'>Error: Page not found</font>"
 			entry = "Error - Page not found"	
-		return render(request, "encyclopedia/entry.html", {"title": entry, "entry":strEntry})
+		return render(request, "encyclopedia/entry.html", {"title": entry, "entry":sContent, "error": error})
 
 def search(request):
 	if request.method == "POST":
@@ -86,24 +84,24 @@ def search(request):
 			for entry in entries:
 				if search.upper() == entry.upper():
 					bfound = True
-					strEntry = util.get_entry(entry)
-					if strEntry is not None:
-						strEntry = markdown2.markdown(strEntry)
+					sContent = util.get_entry(entry)
+					if sContent is not None:
+						sContent = markdown2.markdown(sContent)
 					else:
-						strEntry = f"Error: Page not found ({search})"
-						entry = "Error - Page not found"	
-					return render(request, "encyclopedia/entry.html", {"title": entry, "entry":strEntry})					
+						sContent = f"Error: Page not found ({search})"
+						entry = "<font class='error'>Error - Page not found</font>"	
+					return render(request, "encyclopedia/entry.html", {"title": entry, "entry":sContent})					
 				else: 
 					if search.upper() in entry.upper():
 						#print(entry)
 						entrylist.append(entry)
 			if not entrylist:
-				strEntry = "No results found"
+				sContent = "Search returned no results"
 				entry = "Search"
-				return render(request, "encyclopedia/entry.html", {"title": entry, "entry":strEntry})
+				return render(request, "encyclopedia/entry.html", {"title": entry, "entry":sContent})
 			else:
 				return render(request, "encyclopedia/search.html", {"title": "Search Results", "entries":entrylist})
 		else:
-			strEntry = "Invalid Search Entry"
+			sContent = "Invalid Search Entry"
 			entry = "Search"
-			return render(request, "encyclopedia/entry.html", {"title": entry, "entry":strEntry})						
+			return render(request, "encyclopedia/entry.html", {"title": entry, "entry":sContent})						
