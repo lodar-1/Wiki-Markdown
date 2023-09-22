@@ -6,9 +6,9 @@
 <form method="POST" action =  "{% url 'edit' %}" id="addform">
 	{% csrf_token %}
 	<div class="flex-container">
-		<div><input type="label" label="Title" name="title" size ="50" value="{{ title }}"></div>
-		<div style="color: red;">{{ error }}</div>
-		<div><textarea rows="4" cols="50" name="content" style="width: 100%; height:80vh">{{ content }}</textarea></div>
+		<div><input id="edittitle" type="text" label="Title" name="title" size ="50" value="{{ title }}" readonly></div>
+		<div class="error">{{ error }}</div>
+		<div><textarea rows="4" cols="50" name="content" style="width: 100%; height:80vh" required>{{ content }}</textarea></div>
 		<div style="text-align: right;"><input type="submit" value="Save"></div>
 	</div>
 </form>
