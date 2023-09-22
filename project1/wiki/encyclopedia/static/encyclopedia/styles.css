@@ -15,12 +15,46 @@ body {
   padding: 0px;
   text-align: left;
 }
+.grid-container {
+	display: grid;
+	grid-template-areas:
+		'title error publish'
+		'content content content';
+	gap: 10px;
+	padding: 10px;
+}
+
+.item1 { grid-area: title; }
+.item2 { grid-area: publish; }
+.item3 { grid-area: content; }
+.item4 { 
+	grid-area: error; 
+	color: 
+	red;
+	font-weight: bold;
+}
 
 .error {
 	color: 
 	red;
 	font-weight: bold;
 }
+.publish {
+	background-color: #4d90fe;
+	border: 1px solid #3079ed;
+	color: #fff;
+	height: 30px;
+	min-width: 120px;
+	padding: 0 12px;
+	border-radius: 2px;
+	cursor: default;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+	white-space: nowrap;
+	float: right;	
+}
+
 code {
     white-space: pre;
 }
